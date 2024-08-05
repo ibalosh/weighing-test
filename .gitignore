@@ -1,0 +1,13 @@
+# node libraries
+node_modules/
+
+# playwright reports
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/test-results/
+
+# visual code 
+.vscode
+
+# general

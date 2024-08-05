@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "paths": {
+      "@helpers": ["lib/helpers"],
+      "@pages": ["lib/pages"],
+    }
+  }
+}

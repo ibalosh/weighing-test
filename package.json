@@ -1,0 +1,20 @@
+{
+  "name": "weight-what",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "init": "sh ./scripts/init.sh",
+    "test": "npx playwright test",
+    "run_docker_test": "docker run -it --workdir=/my_tests  -v $PWD:/my_tests --rm playwright-docker:latest npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.0.2"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.45.3"
+  }
+}
