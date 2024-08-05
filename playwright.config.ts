@@ -1,4 +1,5 @@
 import { defineConfig } from "@playwright/test";
+import "dotenv/config";
 
 /**
  * Read environment variables from file.
@@ -7,7 +8,7 @@ import { defineConfig } from "@playwright/test";
 // import dotenv from 'dotenv';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL
+const baseURL = process.env.TESTS_BASE_URL
 
 /**
  * See https://playwright.dev/docs/test-configuration.
