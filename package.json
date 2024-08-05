@@ -5,7 +5,7 @@
   "scripts": {
     "init": "sh ./scripts/init.sh",
     "test": "npx playwright test",
-    "run_docker_test": "docker run -it --workdir=/my_tests  -v $PWD:/my_tests --rm playwright-docker:latest npm run test"
+    "testd": "docker run -it --workdir=/my_tests  -v $PWD:/my_tests --rm mcr.microsoft.com/playwright:v1.45.3-jammy npm run test"
   },
   "keywords": [],
   "author": "",

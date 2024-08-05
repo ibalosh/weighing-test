@@ -1,6 +1,0 @@
-services:
-  weight-what:
-    build: .
-    volumes:
-      - .:/usr/src/app
-    command: npx playwright test
