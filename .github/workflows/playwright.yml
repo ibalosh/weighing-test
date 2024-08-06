@@ -26,6 +26,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install chromium
     - name: Run Playwright tests
+      env:
+        TESTS_BASE_URL: ${{ env.TESTS_BASE_URL }} 
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: always()
