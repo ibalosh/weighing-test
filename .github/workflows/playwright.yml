@@ -28,12 +28,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install chromium
     - name: Print Environment Variable
-      run: echo "The API endpoint is $TESTS_BASE_URL"
+      run: echo "The API endpoint is $API_ENDPOINT"
       env:
-        API_ENDPOINT: ${{ env.TESTS_BASE_URL }}      
+        API_ENDPOINT: ${{ secrets.TESTS_BASE_URL }}      
     - name: Run Playwright tests
       env:
-        TESTS_BASE_URL: ${{ env.TESTS_BASE_URL }} 
+        TESTS_BASE_URL: ${{ secrets.TESTS_BASE_URL }} 
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: always()
