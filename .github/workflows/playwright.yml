@@ -27,6 +27,10 @@ jobs:
           playwright-
     - name: Install Playwright Browsers
       run: npx playwright install chromium
+    - name: Print Environment Variable
+      run: echo "The API endpoint is $TESTS_BASE_URL"
+      env:
+        API_ENDPOINT: ${{ env.TESTS_BASE_URL }}      
     - name: Run Playwright tests
       env:
         TESTS_BASE_URL: ${{ env.TESTS_BASE_URL }} 
