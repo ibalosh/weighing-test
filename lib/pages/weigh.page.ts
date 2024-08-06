@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
-import { findArrayWhichHasFakeBar, WeightBars, splitArray } from "@helpers"
+import { WeightBars, splitArray, parseResultFromString } from "@helpers"
+import { parse } from "path";
 
 export class WeighPage {
   readonly weighButton = this.page.getByRole("button", { name: "Weigh" });
@@ -40,26 +41,31 @@ export class WeighPage {
     await this.weighButton.click();
   }
 
-  async findFakeBar() {
-    await this.resetButton.click();
-    let arrayWithFakeBar = WeightBars
-    let lastBar = WeightBars.pop();
-    
-    let [left, right] = splitArray(WeightBars);
-    let result = await this.executeWeightCheck(left, right);
-    
-    if (result.includes("=")) {
-      return lastBar;
-    }
+  async findFakeBar(): Promise<number> {
+    let weightBars = WeightBars;
 
-    while (arrayWithFakeBar.length > 2) {
-      arrayWithFakeBar = await findArrayWhichHasFakeBar(result);
-      [left, right] = splitArray(arrayWithFakeBar);
-      result = await this.executeWeightCheck(left, right);
+    while (weightBars.length > 1) {
+      await this.resetButton.click();
+      weightBars = await this.findArrayContainingFakeBar(weightBars)
     }
     
-    arrayWithFakeBar = await findArrayWhichHasFakeBar(result);
-    return await arrayWithFakeBar[0];
+    return weightBars[0];
+  }
+
+  async findArrayContainingFakeBar(array: number[]) {
+    const [left, right, leftOver] = splitArray(array);
+    const resultText = await this.executeWeightCheck(left, right);
+    const { leftArray, operator, rightArray } = parseResultFromString(resultText)
+
+    if (operator === "=") {
+      return leftOver;
+    } 
+    else if (operator === "<") {
+      return leftArray; 
+    } 
+    else {
+      return rightArray;
+    }
   }
 
   async executeWeightCheck(left: number[], right: number[]) {

@@ -11,6 +11,6 @@ test.describe("Weigh gold bars", async () => {
     const dialogMessageText = await weighPage.clickFakeBar(fakeGoldBar);
 
     expect(dialogMessageText).toBe("Yay! You find it!");
-    printWeighingSummary(dialogMessageText, fakeGoldBar,await weighPage.results().allInnerTexts());
+    printWeighingSummary(fakeGoldBar,await weighPage.results().allInnerTexts());
   });
 });
