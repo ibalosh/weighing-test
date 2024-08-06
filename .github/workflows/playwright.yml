@@ -8,7 +8,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    environment: Configuration
 
     steps:
     - uses: actions/checkout@v4
@@ -27,10 +26,6 @@ jobs:
           playwright-
     - name: Install Playwright Browsers
       run: npx playwright install chromium
-    - name: Print Environment Variable
-      run: echo "The API endpoint is $API_ENDPOINT"
-      env:
-        API_ENDPOINT: ${{ secrets.TESTS_BASE_URL }}      
     - name: Run Playwright tests
       env:
         TESTS_BASE_URL: ${{ secrets.TESTS_BASE_URL }} 
