@@ -52,7 +52,20 @@ export class WeighPage {
     return weightBars[0];
   }
 
-  async findArrayContainingFakeBar(array: number[]) {
+  async clickFakeBar(index: number): Promise<string> {
+    const dialogMessagePromise = new Promise<string>((resolve) => {
+      this.page.once("dialog", async (dialog) => {
+        const message = dialog.message();
+        await dialog.dismiss();
+        resolve(message);
+      });
+    });
+
+    await this.barAtIndex(index).click();
+    return await dialogMessagePromise;
+  }
+
+  private async findArrayContainingFakeBar(array: number[]) {
     const [left, right, leftOver] = splitArray(array);
     const resultString = await this.executeWeightCheck(left, right);
     const { leftArray, operator, rightArray } = parseResultFromString(resultString)
@@ -68,22 +81,9 @@ export class WeighPage {
     }
   }
 
-  async executeWeightCheck(left: number[], right: number[]) {
+  private async executeWeightCheck(left: number[], right: number[]) {
     const resultRowCount = await this.results().count();
     await this.weighBowls(left, right);
     return await this.resultsRow(resultRowCount).innerText();
-  }
-
-  async clickFakeBar(index: number): Promise<string> {
-    const dialogMessagePromise = new Promise<string>((resolve) => {
-      this.page.once("dialog", async (dialog) => {
-        const message = dialog.message();
-        await dialog.dismiss();
-        resolve(message);
-      });
-    });
-
-    await this.barAtIndex(index).click();
-    return await dialogMessagePromise;
   }
 }

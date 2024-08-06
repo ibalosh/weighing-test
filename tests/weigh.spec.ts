@@ -3,7 +3,7 @@ import { WeighPage } from "@pages";
 import {printSummary} from "@helpers";
 
 test.describe("Weigh gold bars", async () => {
-  test("locate the fake bar that weighs less than others", async ({ page }) => {
+  test("locate the bar that weighs less than others", async ({ page }) => {
     const weighPage = new WeighPage(page);
     await weighPage.visit();
 
