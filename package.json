@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "init": "sh ./scripts/init.sh",
+    "setup": "sh ./scripts/setup.sh",
     "test": "npx playwright test",
     "testd": "docker run -it --workdir=/my_tests  -v $PWD:/my_tests --rm mcr.microsoft.com/playwright:v1.45.3-jammy npm run test"
   },

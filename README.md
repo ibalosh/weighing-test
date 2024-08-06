@@ -7,7 +7,7 @@
 3. Install all necessary things
 
 ```bash
-npm run init
+npm run setup
 ```
 
 6. Run the tests & view report
