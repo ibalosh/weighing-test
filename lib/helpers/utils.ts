@@ -13,7 +13,6 @@ export function splitArray(array: number[]): number[][] {
     return [array.slice(0, midIndex), array.slice(midIndex)];
 }
 
-// Extract weighted bars and comparison operator
 export function parseResultFromString(input: string): { leftArray: number[]; operator: string; rightArray: number[] } {
     const match = input.match(/\[(.*?)\] (>|<) \[(.*?)\]/);
     const operator = match[2];
