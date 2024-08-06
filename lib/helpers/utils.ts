@@ -21,7 +21,7 @@ export function parseResultFromString(input: string): { leftArray: number[]; ope
     return { leftArray, operator, rightArray };
 }
 
-export function printWeighingSummary(bar: number, results: string[]) {
+export function printSummary(bar: number, results: string[]) {
     console.log(`The fake bar is: ${bar}`);
     console.log("\nWeighing steps:");
 

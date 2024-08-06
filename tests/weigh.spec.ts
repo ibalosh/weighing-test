@@ -1,16 +1,16 @@
 import { test, expect } from "@playwright/test";
 import { WeighPage } from "@pages";
-import { printWeighingSummary } from "@helpers";
+import {printSummary} from "@helpers";
 
 test.describe("Weigh gold bars", async () => {
-  test("locate the fake bar that weighs less", async ({ page }) => {
+  test("locate the fake bar that weighs less than others", async ({ page }) => {
     const weighPage = new WeighPage(page);
     await weighPage.visit();
 
-    const fakeGoldBar = await weighPage.findFakeBar();
-    const dialogMessageText = await weighPage.clickFakeBar(fakeGoldBar);
+    const fakeBar = await weighPage.findFakeBar();
+    const dialogMessageText = await weighPage.clickFakeBar(fakeBar);
 
     expect(dialogMessageText).toBe("Yay! You find it!");
-    printWeighingSummary(fakeGoldBar,await weighPage.results().allInnerTexts());
+    printSummary(fakeBar,await weighPage.results().allInnerTexts());
   });
 });
