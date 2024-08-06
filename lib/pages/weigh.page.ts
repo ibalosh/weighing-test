@@ -54,8 +54,8 @@ export class WeighPage {
 
   async findArrayContainingFakeBar(array: number[]) {
     const [left, right, leftOver] = splitArray(array);
-    const resultText = await this.executeWeightCheck(left, right);
-    const { leftArray, operator, rightArray } = parseResultFromString(resultText)
+    const resultString = await this.executeWeightCheck(left, right);
+    const { leftArray, operator, rightArray } = parseResultFromString(resultString)
 
     if (operator === "=") {
       return leftOver;
@@ -69,9 +69,9 @@ export class WeighPage {
   }
 
   async executeWeightCheck(left: number[], right: number[]) {
-    const resultRow = await this.results().count();
+    const resultRowCount = await this.results().count();
     await this.weighBowls(left, right);
-    return await this.resultsRow(resultRow).innerText();
+    return await this.resultsRow(resultRowCount).innerText();
   }
 
   async clickFakeBar(index: number): Promise<string> {
