@@ -1,24 +1,29 @@
-## Setup
+![test workflow](https://github.com/ibalosh/weighing-test/actions/workflows/playwright.yml/badge.svg)
+
+## Requirements
+ 
+Ensure [nvm](https://github.com/nvm-sh/nvm) is installed
+
+
+## Setup 
 
 1. Clone this repo & `cd` into root directory
 
-2. Ensure [nvm](https://github.com/nvm-sh/nvm) is installed
-
-3. Install all necessary things
+2. Install all necessary things
 
 ```bash
-npm run setup
+  npm run setup
 ```
 
-4. Run the tests & view report
+3. Run the tests & view report
 
 ```bash
-npx playwright test
-npx playwright show-report
+  npx playwright test
+  npx playwright show-report
 ```
 
-5. If you have [Docker](https://docs.docker.com/engine/install/) installed then you can run tests using this command
+4. If you have [Docker](https://docs.docker.com/engine/install/) installed then you can run tests using this command.
 
 ```bash
-docker compose up
+  npm run testd
 ```

@@ -7,9 +7,9 @@ node_modules/
 /playwright/.cache/
 /test-results/
 
-# visual code 
+# project IDE setup configs
 .vscode
+.idea
 
 # general
-
 .env
