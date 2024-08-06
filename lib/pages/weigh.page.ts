@@ -5,11 +5,11 @@ export class WeighPage {
   readonly weighButton = this.page.getByRole("button", { name: "Weigh" });
   readonly resetButton = this.page.getByRole("button", { name: "Reset" });
   
-  goldBarAtIndex(index: number): Locator {
+  barAtIndex(index: number): Locator {
     return this.page.locator(`#coin_${index}`);
   }
 
-  barInBowl(bowlSide: "left" | "right", index: number): Locator {
+  barInBowlAtIndex(bowlSide: "left" | "right", index: number): Locator {
     return this.page.locator(`#${bowlSide}_${index}`);
   }
 
@@ -29,18 +29,18 @@ export class WeighPage {
 
   async fillBowlWithBars(bars: number[], bowlSide: "left" | "right") {
     for (let i = 0; i < bars.length; i++) {
-      await this.barInBowl(bowlSide, i).fill(`${bars[i]}`);
+      await this.barInBowlAtIndex(bowlSide, i).fill(`${bars[i]}`);
     }
   }
 
-  async weightBowls(leftBowlBars: number[], rightBowlBars: number[] = []) {
+  async weighBowls(leftBowlBars: number[], rightBowlBars: number[]) {
     await this.resetButton.click();
     await this.fillBowlWithBars(leftBowlBars, "left");
     await this.fillBowlWithBars(rightBowlBars, "right");
     await this.weighButton.click();
   }
 
-  async findFakeGoldBar() {
+  async findFakeBar() {
     await this.resetButton.click();
     let arrayWithFakeBar = WeightBars
     let lastBar = WeightBars.pop();
@@ -64,11 +64,11 @@ export class WeighPage {
 
   async executeWeightCheck(left: number[], right: number[]) {
     const resultRow = await this.results().count();
-    await this.weightBowls(left, right);
+    await this.weighBowls(left, right);
     return await this.resultsRow(resultRow).innerText();
   }
 
-  async clickFakeGoldBar(index: number): Promise<string> {
+  async clickFakeBar(index: number): Promise<string> {
     const dialogMessagePromise = new Promise<string>((resolve) => {
       this.page.once("dialog", async (dialog) => {
         const message = dialog.message();
@@ -77,7 +77,7 @@ export class WeighPage {
       });
     });
 
-    await this.goldBarAtIndex(index).click();
+    await this.barAtIndex(index).click();
     return await dialogMessagePromise;
   }
 }

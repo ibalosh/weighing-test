@@ -7,8 +7,8 @@ test.describe("Weigh gold bars", async () => {
     const weighPage = new WeighPage(page);
     await weighPage.visit();
 
-    const fakeGoldBar = await weighPage.findFakeGoldBar();
-    const dialogMessageText = await weighPage.clickFakeGoldBar(fakeGoldBar);
+    const fakeGoldBar = await weighPage.findFakeBar();
+    const dialogMessageText = await weighPage.clickFakeBar(fakeGoldBar);
 
     expect(dialogMessageText).toBe("Yay! You find it!");
     printWeighingSummary(dialogMessageText, fakeGoldBar,await weighPage.results().allInnerTexts());
